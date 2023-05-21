@@ -3,7 +3,7 @@ package com.fomenko.models;
 import javax.validation.constraints.*;
 
 public class Person {
-    private int id;
+    private int person_id;
 
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 200, message = "Name should be between 2 and 200 characters")
@@ -17,18 +17,18 @@ public class Person {
 
     }
 
-    public Person(int id, String fullName, int yearOfBirth) {
-        this.id = id;
+    public Person(int person_id, String fullName, int yearOfBirth) {
+        this.person_id = person_id;
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
     }
 
-    public int getId() {
-        return id;
+    public int getPerson_id() {
+        return person_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 
     public String getFullName() {
