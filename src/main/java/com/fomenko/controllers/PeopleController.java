@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fomenko.dao.PersonDAO;
 import com.fomenko.models.Person;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/people")

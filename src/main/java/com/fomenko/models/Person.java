@@ -1,6 +1,6 @@
 package com.fomenko.models;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 public class Person {
     private int person_id;
