@@ -5,12 +5,12 @@ import jakarta.validation.constraints.*;
 public class Person {
     private int person_id;
 
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 200, message = "Name should be between 2 and 200 characters")
+    @NotEmpty(message = "Full name should not be empty")
+    @Size(min = 2, max = 200, message = "Full name should be between 2 and 200 characters")
     private String fullName;
 
-    @Min(value = 0, message = "Age should be greater than 0")
-    @Max(value = 2023, message = "Age should be less than 2023")
+    @Min(value = 0, message = "Year of birth should be greater than 1900")
+    @Max(value = 2023, message = "Year of birth should be less than 2023")
     private int yearOfBirth;
 
     public Person() {
