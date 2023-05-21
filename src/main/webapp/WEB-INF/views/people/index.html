@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Все люди</title>
 </head>
 <body>
 
@@ -11,10 +11,8 @@
        th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">user</a>
 </div>
 
-<br/>
 <hr/>
-
-<a href="/people/new">Create new person</a>
+<button onclick="window.location.href='/people/new'">Добавить нового человека</button>
 
 </body>
 </html>
