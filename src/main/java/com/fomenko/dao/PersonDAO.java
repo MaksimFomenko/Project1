@@ -1,12 +1,15 @@
 package com.fomenko.dao;
 
+import com.fomenko.models.Book;
 import com.fomenko.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.OpenOption;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDAO {
@@ -39,4 +42,16 @@ public class PersonDAO {
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE person_id=?", id);
     }
+
+    public Optional<Person> getPersonByFullName(String fullName) {
+        return jdbcTemplate.query("SELECT * FROM Person WHERE full_name=?", new Object[]{fullName},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
+    }
+
+    public List<Book> getBooksByPersonId(int book_id) {
+        return jdbcTemplate.query("SELECT * FROM Book WHERE person_id=?", new Object[]{book_id},
+                new BeanPropertyRowMapper<>(Book.class));
+    }
 }
+
+
