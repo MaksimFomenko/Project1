@@ -2,13 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Показать</title>
+    <title>Показать Человека</title>
 </head>
 <body>
 <p th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">VALUE</p>
-<p th:text="${person.getPerson_id()}">VALUE</p>
 
-<button th:onclick="|window.location.href='@{/people/{person_id}/edit(person_id=${person.getPerson_id()})}'|">Редактировать</button>
+<div th:if="${books.isEmpty()}">
+    <p>Человек пока не взял ни одной книги</p>
+    <hr/>
+</div>
+
+<div th:if="${!books.isEmpty()}">
+    <hr/>
+    <b>Книги:</b>
+    <br/>
+    <table th:each="book :${books}">
+        <tr th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYearOfPublication()}">book</tr>
+    </table>
+    <hr/>
+</div>
+
+<!--<p th:text="${person.getPerson_id()}">VALUE</p>-->
+
+
+
+<button th:onclick="|window.location.href='@{/people/{person_id}/edit(person_id=${person.getPerson_id()})}'|">Редактировать
+</button>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">
     <input type="submit" value="Удалить"/>

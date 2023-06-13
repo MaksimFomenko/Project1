@@ -1,23 +1,35 @@
 package com.fomenko.models;
 
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Book {
-
     private int book_id;
-    private int person_id;
-    private String nameBook;
-    private String author;
-    private int yearOfPublication;
 
-    public Book(int book_id, int person_id, String nameBook, String author, int yearOfPublication) {
-        this.book_id = book_id;
-        this.person_id = person_id;
-        this.nameBook = nameBook;
-        this.author = author;
-        this.yearOfPublication = yearOfPublication;
-    }
+    @NotEmpty(message = "Название книги не должно быть пустым")
+    @Size(min = 2, max = 200, message = "Название книги должно быть от 2 до 200 символов")
+    private String title;
+
+    @NotEmpty(message = "Автор книги не должен быть пустым")
+    @Size(min = 2, max = 100, message = "Автор книги должен содержать от 2 до 100 символов")
+    private String author;
+
+//    @NotEmpty(message = "Год рождения не должен быть пустым")
+    @Min(value = 1900, message = "Год рождения должен быть выше 1900")
+    @Max(value = 2023, message = "Год рождения не должен быть выше 2023")
+    private int yearOfPublication;
 
     public Book() {
 
+    }
+
+    public Book(String title, String author, int yearOfPublication) {
+        this.title = title;
+        this.author = author;
+        this.yearOfPublication = yearOfPublication;
     }
 
     public int getBook_id() {
@@ -28,20 +40,12 @@ public class Book {
         this.book_id = book_id;
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
-    }
-
-    public String getNameBook() {
-        return nameBook;
-    }
-
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {

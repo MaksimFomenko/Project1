@@ -1,16 +1,18 @@
 package com.fomenko.models;
 
-import jakarta.validation.constraints.*;
+
+import javax.validation.constraints.*;
 
 public class Person {
     private int person_id;
 
-    @NotEmpty(message = "Full name should not be empty")
-    @Size(min = 2, max = 200, message = "Full name should be between 2 and 200 characters")
+    @NotEmpty(message = "ФИО не должно быть пустым")
+    @Size(min = 2, max = 100, message = "ФИО должно быть от 2 до 100 символов")
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+", message = "ФИО должно включать в себя фамилию, имя, отчество начиная с больших букв")
     private String fullName;
 
-    @Min(value = 0, message = "Year of birth should be greater than 1900")
-    @Max(value = 2023, message = "Year of birth should be less than 2023")
+    @Min(value = 1900, message = "Год рождения должен быть выше 1900")
+    @Max(value = 2023, message = "Год рождения должен быть ниже 2023")
     private int yearOfBirth;
 
     public Person() {
