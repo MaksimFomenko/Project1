@@ -26,8 +26,13 @@ public class PersonDAO {
     }
 
     public Person show(int id) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE person_id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
-                .stream().findAny().orElse(null);
+        return jdbcTemplate.query("SELECT * FROM Person WHERE person_id=?", new Object[]{id},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+    }
+
+    public Optional<Person> getPersonByFullName(String fullName) {
+        return jdbcTemplate.query("SELECT * FROM Person WHERE full_name=?", new Object[]{fullName},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
     public void save(Person person) {
@@ -41,11 +46,6 @@ public class PersonDAO {
 
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE person_id=?", id);
-    }
-
-    public Optional<Person> getPersonByFullName(String fullName) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE full_name=?", new Object[]{fullName},
-                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
     public List<Book> getBooksByPersonId(int book_id) {
