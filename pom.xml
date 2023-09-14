@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.fomenko</groupId>
-  <artifactId>project1</artifactId>
+  <artifactId>project2</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -18,7 +18,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <spring.version>5.3.5</spring.version>
+    <spring.version>5.3.5 </spring.version>
     <hibernate.version>5.4.28.Final</hibernate.version>  </properties>
 
   <dependencies>

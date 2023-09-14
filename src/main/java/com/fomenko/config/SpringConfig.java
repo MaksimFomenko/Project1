@@ -5,9 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -26,10 +26,11 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("com.fomenko")
+@PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories("com.fomenko.repositories")
 @EnableWebMvc
-public class SpringConfig implements WebMvcConfigurer {
+public class  SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
@@ -109,8 +110,4 @@ public class SpringConfig implements WebMvcConfigurer {
 
         return transactionManager;
     }
-//    @Bean
-//    public JdbcTemplate jdbcTemplate() {
-//        return new JdbcTemplate(dataSource());
-//    }
 }

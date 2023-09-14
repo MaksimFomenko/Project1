@@ -1,44 +1,56 @@
 package com.fomenko.models;
 
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
+@Entity
+@Table(name = "Person")
 public class Person {
-    private int person_id;
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
 
     @NotEmpty(message = "ФИО не должно быть пустым")
     @Size(min = 2, max = 100, message = "ФИО должно быть от 2 до 100 символов")
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+", message = "ФИО должно включать в себя фамилию, имя, отчество начиная с больших букв")
-    private String fullName;
+     @Column(name = "name")
+    private String name;
 
     @Min(value = 1900, message = "Год рождения должен быть выше 1900")
     @Max(value = 2023, message = "Год рождения должен быть ниже 2023")
+    @Column(name = "year_of_birth")
     private int yearOfBirth;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
 
     public Person() {
 
     }
 
-    public Person(int person_id, String fullName, int yearOfBirth) {
-        this.person_id = person_id;
-        this.fullName = fullName;
+    public Person(String name, int yearOfBirth) {
+        this.name = name;
         this.yearOfBirth = yearOfBirth;
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public int getId() {
+        return id;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getYearOfBirth() {
@@ -47,5 +59,13 @@ public class Person {
 
     public void setYearOfBirth(int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

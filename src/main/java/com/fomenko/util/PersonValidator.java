@@ -1,19 +1,18 @@
 package com.fomenko.util;
 
-import com.fomenko.dao.PersonDAO;
 import com.fomenko.models.Person;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fomenko.services.PeopleService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
 public class PersonValidator implements Validator {
-    private final PersonDAO personDAO;
 
-    @Autowired
-    public PersonValidator(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    private final PeopleService peopleService;
+
+    public PersonValidator(PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
 
     @Override
@@ -25,9 +24,7 @@ public class PersonValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Person person = (Person) o;
 
-        if(personDAO.getPersonByFullName(person.getFullName()).isPresent()) {
-            errors.rejectValue("fullName", "", "Человек с таким ФИО уже существует");
-        }
-
+        if (peopleService.getPersonByName(person.getName()).isPresent())
+            errors.rejectValue("name", "", "человек с этим именем уже существует");
     }
 }
